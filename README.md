@@ -1,3 +1,3 @@
 bar-chart
 =========
-four version of this bar chart github
+This is a bar chart of the cost of cable TV subscriptions. It is a d3 test.
