@@ -3,65 +3,82 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>D3 Test</title>
+        <title>Cable Subscribers-D3 Test</title>
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-        <style type="text/css">
+<style>
             h1 {
                 font-size: 17px;
                 margin-left: 30px;
-                font-family: arial;
+                font-family: Arial, sans-serif;
                 font-weight: normal;
+                letter-spacing: 4px;
+              color: #5f5f5f;
                 }
-
             .bar {
             fill: #ddd;
             }
-
             .g-ESPN {
             fill: orange;
             }
-
             .g-label {
-            font-family: arial;
-            font-weight: bold;
+            font-family: Arial, sans-serif;
+            font-weight: normal;
+            letter-spacing: 2px;
             font-size: 13px;
             }
-
-        </style>
+           .g-label-t {
+            font-family: Arial, sans-serif;
+            font-weight: normal;
+            letter-spacing: 2px;
+            font-size: 10px;
+}
+            .g-cspan,.g-tnt,.g-twc,.g-msnbc {
+                fill: #5f5f5f;
+                }
+             h2 {
+                font-size: 25px;
+                margin-left: 30px;
+                font-family: Arial, sans-serif;
+                font-weight: normal;
+                letter-spacing: 2px;
+                }
+p {
+                font-size: 13px;
+                margin-left: 30px;
+                font-family: Arial, sans-serif;
+                font-weight: normal;
+                letter-spacing: 2px;
+                }
+.header {
+  margin-bottom: 50px;
+  color: #5f5f5f;
+}
+</style>
     </head>
     <body>
-        <script type="text/javascript">
-            d3.select("body").append("h1").text("Cost per pay TV subscriber per month")
-
-            var margin = {top: 20, right: 10, bottom: 20, left: 10};
-
-            var width = 650 - margin.left - margin.right,
+      <script type="text/javascript">
+            d3.select("body").append("h1").text("COST PER PAY TV SUBSCRIBER PER MONTH")
+            var margin = {top: 0, right: 10, bottom: 20, left: 10};
+            var width = 800 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
-
             var svg = d3.select("body").append("svg")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom)
               .append("g")
               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-            d3.csv("subscription-prices.csv", function(err, prices) { 
-            
+            d3.csv("https://raw.githubusercontent.com/kastanis/bar-chart/master/subscription-prices.csv", function(err, prices) { 
                 prices.forEach(function(d) {
                 d.X2013 = +d.X2013;
                 });
-
                 prices.sort(function(a,b) {
                 return a.X2013 - b.X2013;
                 });
-
             var y = d3.scale.linear()
             .domain([0,6])
             .range([0,height]);
-
             var x = d3.scale.linear()
             .domain([0,prices.length])
             .range([0,width]);
-
             var bar = svg.selectAll(".bar")
             .data(prices)
             .enter().append("rect")
@@ -70,14 +87,51 @@
             .attr("y", function(d) { return height - y(d.X2013)  })
             .attr("x", function(d, i) { return 3 * i})
             .attr("class", "bar")
-            .classed("g-ESPN", function(d) { return d.Network == "ESPN"});
-
+            .classed("g-ESPN", function(d) { return d.Network == "ESPN"})
+            .classed("g-cspan", function(d) { return d.Network == "C-SPAN"})
+            .classed("g-twc", function(d) { return d.Network == "The Weather Channel"})
+            .classed("g-msnbc", function(d) { return d.Network == "MSNBC"})
+            .classed("g-tnt", function(d) { return d.Network == "TNT"});
             svg.append("text")
             .attr("class", "g-label")
-            .attr("x", 520)
+            .attr("x", 590)
             .attr("y", 30)
             .text("ESPN")
+            svg.append("text")
+            .attr("class", "g-label-t")
+            .attr("x", 590)
+            .attr("y", 45)
+            .text("$5.54")
+            svg.append("text")
+            .attr("class", "g-label-t")
+            .attr("x", 590)
+            .attr("y", 57)
+            .text("per subscriber")
+            svg.append("text")
+            .attr("class", "g-label-t")
+            .attr("x", 20)
+            .attr("y", 245)
+            .text("C-SPAN ($0.06)")
+            svg.append("text")
+            .attr("class", "g-label-t")
+            .attr("x", 145)
+            .attr("y", 230)
+            .text("The Weather Channel ($0.06)")
+            svg.append("text")
+            .attr("class", "g-label-t")
+            .attr("x", 365)
+            .attr("y", 220)
+            .text("MSNBC ($0.06)")
+            svg.append("text")
+            .attr("class", "g-label-t")
+            .attr("x", 485)
+            .attr("y", 200)
+            .text("TNT ($0.06)")
             });
         </script>
+<div class="header">
+      <h2> An Expensive Outlier</h2>
+      <p> ESPN’s average monthly price is more than four times the monthly fee for the next most expensive national network.</p>
+      </div>
     </body>
 </html>
