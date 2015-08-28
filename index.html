@@ -1,62 +1,62 @@
 <!-- shamelessly stolen from scott murray: http://alignedleft.com/tutorials -->
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Cable Subscribers-D3 Test</title>
-        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<style>
-            h1 {
-                font-size: 17px;
-                margin-left: 30px;
-                font-family: Arial, sans-serif;
-                font-weight: normal;
-                letter-spacing: 4px;
-              color: #5f5f5f;
-                }
-            .bar {
+<head>
+    <meta charset="utf-8">
+    <title>Cable Subscribers-D3 Test</title>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <style>
+        h1 {
+            font-size: 17px;
+            margin-left: 30px;
+            font-family: Arial, sans-serif;
+            font-weight: normal;
+            letter-spacing: 4px;
+            color: #5f5f5f;
+            }
+        .bar {
             fill: #ddd;
             }
-            .g-ESPN {
+        .g-ESPN {
             fill: orange;
             }
-            .g-label {
+        .g-label {
             font-family: Arial, sans-serif;
             font-weight: normal;
             letter-spacing: 2px;
             font-size: 13px;
             }
-           .g-label-t {
+        .g-label-t {
             font-family: Arial, sans-serif;
             font-weight: normal;
             letter-spacing: 2px;
             font-size: 10px;
-}
-            .g-cspan,.g-tnt,.g-twc,.g-msnbc {
-                fill: #5f5f5f;
-                }
-             h2 {
-                font-size: 25px;
-                margin-left: 30px;
-                font-family: Arial, sans-serif;
-                font-weight: normal;
-                letter-spacing: 2px;
-                }
-p {
-                font-size: 13px;
-                margin-left: 30px;
-                font-family: Arial, sans-serif;
-                font-weight: normal;
-                letter-spacing: 2px;
-                }
-.header {
-  margin-bottom: 50px;
-  color: #5f5f5f;
-}
-</style>
-    </head>
-    <body>
-      <script type="text/javascript">
+            }
+        .g-cspan,.g-tnt,.g-twc,.g-msnbc {
+            fill: #5f5f5f;
+            }
+        h2 {
+            font-size: 25px;
+            margin-left: 30px;
+            font-family: Arial, sans-serif;
+            font-weight: normal;
+            letter-spacing: 2px;
+            }
+        p {
+            font-size: 13px;
+            margin-left: 30px;
+            font-family: Arial, sans-serif;
+            font-weight: normal;
+            letter-spacing: 2px;
+            }
+        .header {
+            margin-bottom: 50px;
+            color: #5f5f5f;
+            }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
             d3.select("body").append("h1").text("COST PER PAY TV SUBSCRIBER PER MONTH")
             var margin = {top: 0, right: 10, bottom: 20, left: 10};
             var width = 800 - margin.left - margin.right,
@@ -129,9 +129,9 @@ p {
             .text("TNT ($0.06)")
             });
         </script>
-<div class="header">
-      <h2> An Expensive Outlier</h2>
-      <p> ESPN’s average monthly price is more than four times the monthly fee for the next most expensive national network.</p>
-      </div>
-    </body>
+        <div class="header">
+        <h2> An Expensive Outlier</h2>
+        <p> ESPN’s average monthly price is more than four times the monthly fee for the next most expensive national network.</p>
+        </div>
+</body>
 </html>
