@@ -1,3 +1,3 @@
 bar-chart
 =========
-This is a bar chart of the cost of cable TV subscriptions. It is a d3 test.
+This is a bar chart of the Bulls winning percentage over time. It is a d3 test.
