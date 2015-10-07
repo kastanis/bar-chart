@@ -16,10 +16,10 @@
         .bar {
             fill: #ddd;
             }
-        .g-ring1 {
-            fill: orange;
+        .g-ring1,.g-ring2,.g-ring3,.g-ring4,.g-ring5,.g-ring6 {
+            fill: red;
             }
-        .g-label {
+        .g-label,body {
             font-family: Arial, sans-serif;
             font-weight: normal;
             letter-spacing: 2px;
@@ -54,6 +54,13 @@
             margin-bottom: 50px;
             color: #5f5f5f;
             }
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: grey;
+            stroke-width: 1;
+            shape-rendering: crispEdges;
+            }
     </style>
 </head>
 <body>
@@ -76,31 +83,82 @@
 //                bulls.sort(function(a,b) {
 //                return a.Percent - b.Percent;
 //                });
+            
+            parseDate = d3.time.format("%Y-%y").parse;
+                
             var y = d3.scale.linear()
             .domain([0,1])
             .range([0,height]);
             var x = d3.scale.linear()
             .domain([0,bulls.length])
             .range([0,width]);
+                
+//            var xAxis = d3.svg.axis().scale(x)
+//            .orient("bottom").ticks(5);
+//
+//            var yAxis = d3.svg.axis().scale(y)
+//            .orient("left").ticks(5);
+//
+//            var valueline = d3.svg.line()
+//            .x(function(d) { return x(d.Season); })
+//            .y(function(d) { return y(1-d.Percent); });
+                
             var bar = svg.selectAll(".bar")
             .data(bulls)
             .enter().append("rect")
-            .attr("width", 3)
+            .attr("width", 4)
             .attr("height", function(d) { return y(d.Percent)} )
             .attr("y", function(d) { return height - y(d.Percent)  })
             .attr("x", function(d, i) { return 10 * i})
             .attr("class", "bar")
-            .classed("g-ring1", function(d) { return d.Season == "1990-91"});
+            .classed("g-ring1", function(d) { return d.Season == "1990-91"})
+            .classed("g-ring2", function(d) { return d.Season == "1991-92"})
+            .classed("g-ring3", function(d) { return d.Season == "1992-93"})
+            .classed("g-ring4", function(d) { return d.Season == "1995-96"})
+            .classed("g-ring5", function(d) { return d.Season == "1996-97"})
+            .classed("g-ring6", function(d) { return d.Season == "1997-98"});
             svg.append("text")
             .attr("class", "g-label")
-            .attr("x", 240)
+            .attr("x", 192)
             .attr("y", 50)
             .text("Ring 1")
+            svg.append("text")
+            .attr("class", "g-label")
+            .attr("x", 247)
+            .attr("y", 40)
+            .text("2")
+            svg.append("text")
+            .attr("class", "g-label")
+            .attr("x", 260)
+            .attr("y", 50)
+            .text("3")
+              svg.append("text")
+            .attr("class", "g-label")
+            .attr("x", 287)
+            .attr("y", 25)
+            .text("4")
+            svg.append("text")
+            .attr("class", "g-label")
+            .attr("x", 299)
+            .attr("y", 38)
+            .text("5")
+            svg.append("text")
+            .attr("class", "g-label")
+            .attr("x", 310)
+            .attr("y", 50)
+            .text("6")
+//            svg.append("g")
+//            .attr("class", "x axis")
+//            .attr("transform", "translate(0," + height + ")")
+//            .call(xAxis);
+//            svg.append("g")
+//            .attr("class", "y axis")
+//            .call(yAxis);
             });
         </script>
         <div class="header">
         <h2>No wonder there were 6 rings in the 90's</h2>
-        <p> ESPN’s average monthly price is more than four times the monthly fee for the next most expensive national network.</p>
+        <p> The Bulls winning percentage in the golden years was quite high. But what happened in 2008?</p>
         </div>
 </body>
 </html>
