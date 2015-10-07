@@ -1,9 +1,8 @@
-<!-- shamelessly stolen from scott murray: http://alignedleft.com/tutorials -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Cable Subscribers-D3 Test</title>
+    <title>Chicago Bulls Wins Over Time</title>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <style>
         h1 {
@@ -17,7 +16,7 @@
         .bar {
             fill: #ddd;
             }
-        .g-ESPN {
+        .g-ring1 {
             fill: orange;
             }
         .g-label {
@@ -26,6 +25,7 @@
             letter-spacing: 2px;
             font-size: 13px;
             }
+/*
         .g-label-t {
             font-family: Arial, sans-serif;
             font-weight: normal;
@@ -35,6 +35,7 @@
         .g-cspan,.g-tnt,.g-twc,.g-msnbc {
             fill: #5f5f5f;
             }
+*/
         h2 {
             font-size: 25px;
             margin-left: 30px;
@@ -57,8 +58,8 @@
 </head>
 <body>
     <script type="text/javascript">
-            d3.select("body").append("h1").text("COST PER PAY TV SUBSCRIBER PER MONTH")
-            var margin = {top: 0, right: 10, bottom: 20, left: 10};
+            d3.select("body").append("h1").text("CHICAGO BULLS WIN PERCENTAGE PER SEASON")
+            var margin = {top: 0, right: 40, bottom: 20, left: 40};
             var width = 800 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
             var svg = d3.select("body").append("svg")
@@ -66,71 +67,39 @@
               .attr("height", height + margin.top + margin.bottom)
               .append("g")
               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            d3.csv("https://raw.githubusercontent.com/kastanis/bar-chart/master/subscription-prices.csv", function(err, prices) { 
-                prices.forEach(function(d) {
-                d.X2013 = +d.X2013;
+
+            d3.csv("bulls_percentage.csv", function(err,bulls) {
+                bulls.forEach(function(d) {
+                d.Season = d.Season;
+                d.Percent = +d.Percent;
                 });
-                prices.sort(function(a,b) {
-                return a.X2013 - b.X2013;
-                });
+//                bulls.sort(function(a,b) {
+//                return a.Percent - b.Percent;
+//                });
             var y = d3.scale.linear()
-            .domain([0,6])
+            .domain([0,1])
             .range([0,height]);
             var x = d3.scale.linear()
-            .domain([0,prices.length])
+            .domain([0,bulls.length])
             .range([0,width]);
             var bar = svg.selectAll(".bar")
-            .data(prices)
+            .data(bulls)
             .enter().append("rect")
-            .attr("width", 2)
-            .attr("height", function(d) { return y(d.X2013)} )
-            .attr("y", function(d) { return height - y(d.X2013)  })
-            .attr("x", function(d, i) { return 3 * i})
+            .attr("width", 3)
+            .attr("height", function(d) { return y(d.Percent)} )
+            .attr("y", function(d) { return height - y(d.Percent)  })
+            .attr("x", function(d, i) { return 10 * i})
             .attr("class", "bar")
-            .classed("g-ESPN", function(d) { return d.Network == "ESPN"})
-            .classed("g-cspan", function(d) { return d.Network == "C-SPAN"})
-            .classed("g-twc", function(d) { return d.Network == "The Weather Channel"})
-            .classed("g-msnbc", function(d) { return d.Network == "MSNBC"})
-            .classed("g-tnt", function(d) { return d.Network == "TNT"});
+            .classed("g-ring1", function(d) { return d.Season == "1990-91"});
             svg.append("text")
             .attr("class", "g-label")
-            .attr("x", 590)
-            .attr("y", 30)
-            .text("ESPN")
-            svg.append("text")
-            .attr("class", "g-label-t")
-            .attr("x", 590)
-            .attr("y", 45)
-            .text("$5.54")
-            svg.append("text")
-            .attr("class", "g-label-t")
-            .attr("x", 590)
-            .attr("y", 57)
-            .text("per subscriber")
-            svg.append("text")
-            .attr("class", "g-label-t")
-            .attr("x", 20)
-            .attr("y", 245)
-            .text("C-SPAN ($0.06)")
-            svg.append("text")
-            .attr("class", "g-label-t")
-            .attr("x", 145)
-            .attr("y", 230)
-            .text("The Weather Channel ($0.06)")
-            svg.append("text")
-            .attr("class", "g-label-t")
-            .attr("x", 365)
-            .attr("y", 220)
-            .text("MSNBC ($0.06)")
-            svg.append("text")
-            .attr("class", "g-label-t")
-            .attr("x", 485)
-            .attr("y", 200)
-            .text("TNT ($0.06)")
+            .attr("x", 240)
+            .attr("y", 50)
+            .text("Ring 1")
             });
         </script>
         <div class="header">
-        <h2> An Expensive Outlier</h2>
+        <h2>No wonder there were 6 rings in the 90's</h2>
         <p> ESPN’s average monthly price is more than four times the monthly fee for the next most expensive national network.</p>
         </div>
 </body>
