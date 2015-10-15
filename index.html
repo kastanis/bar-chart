@@ -44,10 +44,15 @@
             margin-bottom: 50px;
             color: #5f5f5f;
             }
-        .axis path,
-        .axis line {
+        .axis path {
             fill: none;
             stroke: none;
+            stroke-width: 1;
+            shape-rendering: crispEdges;
+            }
+        .axis line {
+            fill: none;
+            stroke: grey;
             stroke-width: 1;
             shape-rendering: crispEdges;
             }
@@ -64,7 +69,7 @@
     <script type="text/javascript">
             d3.select("body").append("h1").text("CHICAGO BULLS WIN PERCENTAGE PER SEASON")
             var margin = {top: 20, right: 40, bottom: 20, left: 40};
-            var width = 565 - margin.left - margin.right,
+            var width = 555 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
             var svg = d3.select("body").append("svg")
               .attr("width", width + margin.left + margin.right)
@@ -85,7 +90,7 @@
             .range([0,width]);
                   
             var xAxis = d3.svg.axis().scale(x)
-            .orient("bottom").ticks(5);
+            .orient("bottom").ticks(5).tickFormat(d3.format("d"));
                 
             var xAxis2 = d3.svg.axis().scale(x)
             .orient("middle").ticks(0);
@@ -103,7 +108,7 @@
             .attr("width", 4)
             .attr("height", function(d) { return y(d.Percent)} )
             .attr("y", function(d) { return height - y(d.Percent)  })
-            .attr("x", function(d, i) { return 10 * i})
+            .attr("x", function(d, i) { return 9.9 * i})
             .attr("class", "bar")
             .classed("g-ring1", function(d) { return d.Season == "1990-91"})
             .classed("g-ring2", function(d) { return d.Season == "1991-92"})
