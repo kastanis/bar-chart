@@ -26,6 +26,13 @@
             letter-spacing: 2px;
             font-size: 13px;
             }
+        .g2 {
+            font-family: Arial, sans-serif;
+            font-weight: normal;
+            fill: #ddd;
+            letter-spacing: 2px;
+            font-size: 10px;
+            }
         h2 {
             font-size: 25px;
             margin-left: 30px;
@@ -53,14 +60,13 @@
         .axis line {
             fill: none;
             stroke: grey;
-            stroke-width: 1;
+            stroke-width: none;
             shape-rendering: crispEdges;
             }
-        .xaxis2 {
-            stroke:;
+        .xAxis2 {
             fill: none;
-            stroke: grey;
-            stroke-width: .5;
+            stroke: #ddddd5;
+            stroke-width: none;
             shape-rendering: crispEdges;
         }
     </style>
@@ -69,7 +75,7 @@
     <script type="text/javascript">
             d3.select("body").append("h1").text("CHICAGO BULLS WIN PERCENTAGE PER SEASON")
             var margin = {top: 20, right: 40, bottom: 20, left: 40};
-            var width = 555 - margin.left - margin.right,
+            var width = 561 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
             var svg = d3.select("body").append("svg")
               .attr("width", width + margin.left + margin.right)
@@ -86,7 +92,7 @@
             .domain([0,1])
             .range([0,height]);
             var x = d3.scale.linear()
-            .domain([1966,2015])
+            .domain([1966,2014])
             .range([0,width]);
                   
             var xAxis = d3.svg.axis().scale(x)
@@ -108,7 +114,7 @@
             .attr("width", 4)
             .attr("height", function(d) { return y(d.Percent)} )
             .attr("y", function(d) { return height - y(d.Percent)  })
-            .attr("x", function(d, i) { return 9.9 * i})
+            .attr("x", function(d, i) { return 9.95 * i})
             .attr("class", "bar")
             .classed("g-ring1", function(d) { return d.Season == "1990-91"})
             .classed("g-ring2", function(d) { return d.Season == "1991-92"})
@@ -146,12 +152,17 @@
             .attr("x", 310)
             .attr("y", 50)
             .text("6")
+            svg.append("text")
+            .attr("class", "g2")
+            .attr("x", 0)
+            .attr("y", 125)
+            .text(".500")
             svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis) 
             svg.append("g")
-            .attr("class", "xaxis2")
+            .attr("class", "xAxis2")
             .attr("transform", "translate(0," + height/2 + ")")
             .call(xAxis2)
             svg.append("g")
