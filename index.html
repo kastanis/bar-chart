@@ -8,6 +8,7 @@
         h1 {
             font-size: 17px;
             margin-left: 30px;
+            margin-top: 50px;
             font-family: Arial, sans-serif;
             font-weight: normal;
             letter-spacing: 4px;
@@ -25,17 +26,6 @@
             letter-spacing: 2px;
             font-size: 13px;
             }
-/*
-        .g-label-t {
-            font-family: Arial, sans-serif;
-            font-weight: normal;
-            letter-spacing: 2px;
-            font-size: 10px;
-            }
-        .g-cspan,.g-tnt,.g-twc,.g-msnbc {
-            fill: #5f5f5f;
-            }
-*/
         h2 {
             font-size: 25px;
             margin-left: 30px;
@@ -57,51 +47,55 @@
         .axis path,
         .axis line {
             fill: none;
-            stroke: grey;
+            stroke: none;
             stroke-width: 1;
             shape-rendering: crispEdges;
             }
+        .xaxis2 {
+            stroke:;
+            fill: none;
+            stroke: grey;
+            stroke-width: .5;
+            shape-rendering: crispEdges;
+        }
     </style>
 </head>
 <body>
     <script type="text/javascript">
             d3.select("body").append("h1").text("CHICAGO BULLS WIN PERCENTAGE PER SEASON")
-            var margin = {top: 0, right: 40, bottom: 20, left: 40};
-            var width = 800 - margin.left - margin.right,
+            var margin = {top: 20, right: 40, bottom: 20, left: 40};
+            var width = 565 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
             var svg = d3.select("body").append("svg")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom)
               .append("g")
               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-            d3.csv("bulls_percentage.csv", function(err,bulls) {
+            d3.csv("/bulls_percentage.csv", function(err,bulls) {
                 bulls.forEach(function(d) {
                 d.Season = d.Season;
                 d.Percent = +d.Percent;
                 });
-//                bulls.sort(function(a,b) {
-//                return a.Percent - b.Percent;
-//                });
-            
-            parseDate = d3.time.format("%Y-%y").parse;
                 
             var y = d3.scale.linear()
             .domain([0,1])
             .range([0,height]);
             var x = d3.scale.linear()
-            .domain([0,bulls.length])
+            .domain([1966,2015])
             .range([0,width]);
+                  
+            var xAxis = d3.svg.axis().scale(x)
+            .orient("bottom").ticks(5);
                 
-//            var xAxis = d3.svg.axis().scale(x)
-//            .orient("bottom").ticks(5);
-//
-//            var yAxis = d3.svg.axis().scale(y)
-//            .orient("left").ticks(5);
-//
-//            var valueline = d3.svg.line()
-//            .x(function(d) { return x(d.Season); })
-//            .y(function(d) { return y(1-d.Percent); });
+            var xAxis2 = d3.svg.axis().scale(x)
+            .orient("middle").ticks(0);
+            
+            var yAxis = d3.svg.axis().scale(y)
+            .orient("left").ticks(0);
+
+            var valueline = d3.svg.line()
+            .x(function(d) { return x(d.Season); })
+            .y(function(d) { return y(d.Percent); });
                 
             var bar = svg.selectAll(".bar")
             .data(bulls)
@@ -147,18 +141,22 @@
             .attr("x", 310)
             .attr("y", 50)
             .text("6")
-//            svg.append("g")
-//            .attr("class", "x axis")
-//            .attr("transform", "translate(0," + height + ")")
-//            .call(xAxis);
-//            svg.append("g")
-//            .attr("class", "y axis")
-//            .call(yAxis);
+            svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis) 
+            svg.append("g")
+            .attr("class", "xaxis2")
+            .attr("transform", "translate(0," + height/2 + ")")
+            .call(xAxis2)
+            svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
             });
         </script>
         <div class="header">
         <h2>No wonder there were 6 rings in the 90's</h2>
-        <p> The Bulls winning percentage in the golden years was quite high. But what happened in 2008?</p>
+        <p> The Bulls winning percentage in the golden years was quite high. But what happened in 2010-11?</p>
         </div>
 </body>
 </html>
