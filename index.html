@@ -71,7 +71,7 @@
               .attr("height", height + margin.top + margin.bottom)
               .append("g")
               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            d3.csv("/bulls_percentage.csv", function(err,bulls) {
+            d3.csv("https://raw.githubusercontent.com/kastanis/bar-chart/gh-pages/bulls_percentage.csv", function(err,bulls) {
                 bulls.forEach(function(d) {
                 d.Season = d.Season;
                 d.Percent = +d.Percent;
